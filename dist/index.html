@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Title</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+
+	<meta property="og:image" content="path/to/image.jpg">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="apple-touch-icon" sizes="192x192" href="img/favicon.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+	<style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
+	<link rel="stylesheet" href="css/main.min.css">
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=c633ffe5-1f9b-4cc9-ba18-c6b959a07afc&lang=ru_RU" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+	<main class="content">
+		<div class="sidebar">
+			<form class="sidebar__btn-box">
+				<input type="radio" class="sidebar__country-input" name="country" id="russia" checked>
+				<label for="russia" class="sidebar__btn" data-country="Россия"><p class="sidebar__btn-text">Россия</p></label>
+				<input type="radio" class="sidebar__country-input" name="country" id="belarus">
+				<label for="belarus" class="sidebar__btn" data-country="Беларусь"><p class="sidebar__btn-text">Беларусь</p></label>
+			</form>
+			<ul class="sidebar__cities-list">
+				
+			</ul>
+		</div>
+		<div class="map" id="map">
+
+		</div>
+	</main>
+	
+	<template class="city-template" style="display: none;">
+		<li class="city">
+			<div class="city__header" tabindex="0">
+				<p class="city__name"></p>
+				<svg id="city__header-arrow" class="icon city__header-arrow" data-name="city__header-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+					<polygon points="13.88 2.92 8 8.81 2.12 2.92 0 5.04 5.88 10.92 8 13.04 10.12 10.92 16 5.04 13.88 2.92"/>
+				</svg>				
+			</div>
+			<div class="city__offices-box">
+				
+			</div>
+		</li>
+	</template>
+
+	<template class="office-template" style="display: none;">
+		<div class="city__office">
+			<p class="city__office-name"></p>
+			<p class="city__manager-name"></p>
+			<div class="city__phones-list">
+				
+			</div>
+			<div class="city__emails-list">
+				
+			</div>
+		</div>
+	</template>
+
+	<script src="js/scripts.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+[{
+	"country": "Россия",
+	"city": "Москва",
+	"offices": [{
+		"adress": "УЛИЦА МАРОСЕЙКА, 11",
+		"managerName": "Лягушкин Иван Сергеевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}, {
+		"name": "УСАЧЁВА УЛИЦА, 11И",
+		"managerName": "Харитонов Василий Артемиевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]
+	}]
+}, {
+	"country": "Россия",
+	"city": "Новосибирск",
+	"offices": [{
+		"adress": "УЛИЦА КРЫЛОВА, 36",
+		"managerName": "Лягушкин Иван Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]
+	}, {
+		"adress": "ПЛОЩАДЬ КАРЛА МАРКСА, 7",
+		"managerName": "Харитонов Василий Артемиевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]
+	}]
+}, {
+	"country": "Россия",
+	"city": "Пермь",
+	"offices": [{
+		"adress": "УЛИЦА КУЙБЫШЕВА, 16",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Россия",
+	"city": "Иркутск",
+	"offices": [{
+		"adress": "Верхняя набережная, 10",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Россия",
+	"city": "Волгоград",
+	"offices": [{
+		"adress": "Советская улица, 17",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Беларусь",
+	"city": "Минск",
+	"offices": [{
+		"adress": "Комсомольская улица, 23",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Беларусь",
+	"city": "Могилёв",
+	"offices": [{
+		"adress": "улица Крыленко, 10",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}, {
+		"adress": "улица Бонч-Бруевича, 6",
+		"managerName": "Харитонов Василий Артемиевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]
+	}]
+}, {
+	"country": "Беларусь",
+	"city": "Витебск",
+	"offices": [{
+		"adress": "Московский проспект, 16",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Беларусь",
+	"city": "Гомель",
+	"offices": [{
+		"adress": "улица Катунина, 6",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	}]
+}, {
+	"country": "Беларусь",
+	"city": "Бобруйск",
+	"offices": [{
+		"adress": "улица Максима Горького, 7А",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru"]
+	},{
+		"adress": "Красноармейская улица, 55",
+		"managerName": "Панфилов Анатолий Сергеевич",
+		"phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],
+		"emails": ["username@flagstudio.ru", "username@flagstudio.ru"]
+	}]
+}]

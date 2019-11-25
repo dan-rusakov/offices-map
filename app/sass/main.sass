@@ -1,0 +1,143 @@
+@import "fonts"
+@import "libs"
+@import "vars"
+@import "base"
+
+.content
+	padding: 7px
+	display: flex
+	flex-direction: row
+	height: 100vh
+
+.sidebar
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.17)
+	width: 400px
+	overflow-y: auto
+	&__btn-box
+		display: flex
+		flex-direction: row
+		margin-bottom: 15px
+	&__country-input
+		display: none
+		&:checked + .sidebar__btn
+			background-color: $orange
+			color: #fff
+			border: 1px solid $orange
+	&__btn
+		width: 50%
+		font-size: em(12px)
+		padding: em(17px) em(15px) em(14px)
+		background-color: #fff
+		border: 1px solid $gray
+		color: $gray
+		font-weight: 500
+		text-align: center
+		cursor: pointer
+		&:hover, &:focus
+			background-color: $orange
+			color: #fff
+			border: 1px solid $orange
+	&__btn-text
+		margin: 0
+	&__cities-list
+		margin: 0
+		padding: 0
+		list-style-type: none
+	
+.city
+	border:
+		top: 1px solid #ededed
+		bottom: 1px solid #ededed
+	&__header
+		display: flex
+		flex-direction: row
+		align-items: center
+		padding: 27px
+		cursor: pointer
+		&.active
+			.city__header-arrow 
+				transform: rotate(180deg)
+				fill: $orange
+			.city__name
+				color: $orange
+			+ .city__offices-box
+				display: block
+	&__name
+		flex-grow: 1
+		margin: 0
+		font-size: em(17px)
+		color: $darkBlue
+		font-weight: 700
+	&__header-arrow 
+		font-size: em(12px)
+		color: $darkBlue
+	&__office
+		padding: 0 27px 27px
+	&__offices-box
+		display: none
+	&__office-name
+		margin: 0 0 em(20px)
+		color: $darkBlue
+		font-size: em(14px)
+		font-weight: 700
+	&__manager-name
+		margin: 0 0 em(20px)
+		font-size: em(14px)
+		font-weight: normal
+	&__phone
+		margin: 0 em(10px) em(20px) 0
+		display: inline-block
+		font-size: em(14px)
+		font-weight: normal
+	&__email
+		margin: 0
+		color: $blue
+
+.map
+	flex-grow: 1
+
+.balloon-box
+	background-color: $darkBlue
+	width: 370px
+	padding: 17px 30px
+	position: relative
+	transform: translateY(calc(-100% - 23px)) translateX(-30%)
+	border: none
+	&::after
+		content: ''
+		position: absolute
+		width: 0
+		height: 0
+		bottom: 0
+		left: 30%
+		transform: translateY(100%) translateX(-50%)
+		display: block
+		border-left: 8px solid transparent
+		border-right: 8px solid transparent
+		border-top: 15px solid $darkBlue
+	&__office
+		font-size: em(14px)
+		color: $orange
+		font-weight: 700
+		margin: 0 0 em(25px)
+	&__manager-name
+		font-size: em(14px)
+		color: #fff
+		margin: 0 0 em(15px)
+		font-weight: normal
+	&__phone
+		font-size: em(14px)
+		color: #fff
+		margin: 0 em(15px) em(15px) 0
+		font-weight: normal
+		display: inline-block
+	&__email
+		color: $blue
+		margin: 0 0 em(15px)
+		font-weight: normal
+
+#map canvas 
+	filter: grayscale(100%)
+
+
+@import "media" // Всегда в конце
