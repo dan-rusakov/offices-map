@@ -12,7 +12,7 @@ ymaps.ready(function(){
 	var myMap = new ymaps.Map("map", {
 		center: [55.76, 37.64],
 		zoom: 7
-	});
+	}); 
 	var MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
 		'<div class="balloon-box">' +
 			'<p class="balloon-box__office">$[properties.balloonOffice]</p>' +
@@ -144,7 +144,7 @@ ymaps.ready(function(){
 		myMap.geoObjects.removeAll();
 
 		var clusterIcons = [{
-			href: '../img/clusterIcon.svg',
+			href: 'img/clusterIcon.svg',
 			size: [40, 40],
 			offset: [-20, -20]
 		}];
@@ -182,7 +182,7 @@ ymaps.ready(function(){
 					balloonMaxWidth: 800,
 					iconLayout: 'default#imageWithContent',
 					hideIconOnBalloonOpen: false,
-					iconImageHref: '../img/singleIcon.svg',
+					iconImageHref: 'img/singleIcon.svg',
         	iconImageSize: [24, 24],
 					iconImageOffset: [-12, -12]
 
