@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #1e355d;
-        stroke: #fff;
-        stroke-width: 2px;
-      }
-    </style>
-  </defs>
-  <circle id="Эллипс_1" data-name="Эллипс 1" class="cls-1" cx="13" cy="13" r="12"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle data-name="Эллипс 1" cx="13" cy="13" r="12" fill="#1e355d" stroke="#fff" stroke-width="2"/></svg>

@@ -12,7 +12,20 @@
 .sidebar
 	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.17)
 	width: 400px
-	overflow-y: auto
+	display: flex
+	flex-direction: column
+	background-color: #fafafa
+	&__wrapper-cities
+		overflow-y: auto
+		height: 100%
+		&::-webkit-scrollbar-track
+			background-color: #fafafa
+		&::-webkit-scrollbar
+			background-color: #fafafa
+			width: 10px
+		&::-webkit-scrollbar-thumb
+			border-radius: 10px
+			background-color: #dfdfdf
 	&__btn-box
 		display: flex
 		flex-direction: row
@@ -26,10 +39,11 @@
 	&__btn
 		width: 50%
 		font-size: em(12px)
-		padding: em(17px) em(15px) em(14px)
+		padding: em(11px) em(15px) em(9px)
 		background-color: #fff
 		border: 1px solid $gray
 		color: $gray
+		line-height: 1.45
 		font-weight: 500
 		text-align: center
 		cursor: pointer
@@ -52,34 +66,45 @@
 		display: flex
 		flex-direction: row
 		align-items: center
-		padding: 27px
+		padding: 27px 27px 23px
 		cursor: pointer
+		width: 100%
+		background-color: #fafafa
+		border: none
+		text-align: left
 		&.active
 			.city__header-arrow 
 				transform: rotate(180deg)
 				fill: $orange
 			.city__name
 				color: $orange
-			+ .city__offices-box
-				display: block
 	&__name
 		flex-grow: 1
 		margin: 0
 		font-size: em(17px)
-		color: $darkBlue
+		color: #00325e
 		font-weight: 700
+		transition: 0.25s all linear
 	&__header-arrow 
 		font-size: em(12px)
 		color: $darkBlue
+		transition: 0.25s all linear
 	&__office
 		padding: 0 27px 27px
 	&__offices-box
-		display: none
+		overflow: hidden
+		max-height: 0
+		transition: 0.3s all linear
 	&__office-name
 		margin: 0 0 em(20px)
 		color: $darkBlue
 		font-size: em(14px)
 		font-weight: 700
+		background-color: #fafafa
+		border: none
+		text-align: left
+		padding: 0
+		cursor: pointer
 	&__manager-name
 		margin: 0 0 em(20px)
 		font-size: em(14px)
@@ -90,8 +115,11 @@
 		font-size: em(14px)
 		font-weight: normal
 	&__email
-		margin: 0
+		margin: 0 em(10px) em(10px) 0
 		color: $blue
+		display: inline-block
+		text-decoration: none
+
 
 .map
 	flex-grow: 1
@@ -108,7 +136,7 @@
 		position: absolute
 		width: 0
 		height: 0
-		bottom: 0
+		bottom: 1px
 		left: 30%
 		transform: translateY(100%) translateX(-50%)
 		display: block
@@ -133,8 +161,18 @@
 		display: inline-block
 	&__email
 		color: $blue
-		margin: 0 0 em(15px)
+		margin: 0 0 em(5px)
 		font-weight: normal
+		text-decoration: none
+		display: inline-block
+	&__emails-list
+		margin-bottom: em(15px)
+	&__close
+		position: absolute
+		top: 11px
+		right: 11px
+		cursor: pointer
+		font-size: em(11px)
 
 #map canvas 
 	filter: grayscale(100%)

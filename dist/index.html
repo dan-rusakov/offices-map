@@ -5,16 +5,17 @@
 
 	<meta charset="utf-8">
 
-	<title>Title</title>
+	<title>Карта офисов</title>
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 
 	<meta property="og:image" content="path/to/image.jpg">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="apple-touch-icon" sizes="192x192" href="img/favicon.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="img/favicon.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="img/favicon.png">
+	<link rel="icon" type="image/png" sizes="128x128" href="img/favicon.png">
 	<style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
-	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/main.min.css?ver=1.0.1">
+	<script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
 	<script src="https://api-maps.yandex.ru/2.1/?apikey=c633ffe5-1f9b-4cc9-ba18-c6b959a07afc&lang=ru_RU" type="text/javascript"></script>
 
 </head>
@@ -24,14 +25,13 @@
 	<main class="content">
 		<div class="sidebar">
 			<form class="sidebar__btn-box">
-				<input type="radio" class="sidebar__country-input" name="country" id="russia" checked>
-				<label for="russia" class="sidebar__btn" data-country="Россия"><p class="sidebar__btn-text">Россия</p></label>
-				<input type="radio" class="sidebar__country-input" name="country" id="belarus">
-				<label for="belarus" class="sidebar__btn" data-country="Беларусь"><p class="sidebar__btn-text">Беларусь</p></label>
+			
 			</form>
-			<ul class="sidebar__cities-list">
-				
-			</ul>
+			<div class="sidebar__wrapper-cities">
+				<ul class="sidebar__cities-list">
+					
+				</ul>
+			</div>
 		</div>
 		<div class="map" id="map">
 
@@ -40,12 +40,12 @@
 	
 	<template class="city-template" style="display: none;">
 		<li class="city">
-			<div class="city__header" tabindex="0">
+			<button class="city__header">
 				<p class="city__name"></p>
-				<svg id="city__header-arrow" class="icon city__header-arrow" data-name="city__header-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-					<polygon points="13.88 2.92 8 8.81 2.12 2.92 0 5.04 5.88 10.92 8 13.04 10.12 10.92 16 5.04 13.88 2.92"/>
-				</svg>				
-			</div>
+				<svg class="icon city__header-arrow" data-name="city__header-arrow" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+					<polygon points="13.88 2.92 8 8.81 2.12 2.92 0 5.04 5.88 10.92 8 13.04 10.12 10.92 16 5.04"/>
+				</svg>			
+			</button>
 			<div class="city__offices-box">
 				
 			</div>
@@ -54,7 +54,7 @@
 
 	<template class="office-template" style="display: none;">
 		<div class="city__office">
-			<p class="city__office-name"></p>
+			<button class="city__office-name"></button>
 			<p class="city__manager-name"></p>
 			<div class="city__phones-list">
 				
@@ -65,7 +65,12 @@
 		</div>
 	</template>
 
-	<script src="js/scripts.min.js"></script>
+	<template class="country-btn-template" style="display: none;">
+		<input type="radio" class="sidebar__country-input" name="country" id="">
+		<label for="" class="sidebar__btn" data-country=""><p class="sidebar__btn-text"></p></label>
+	</template>
+
+	<script src="js/scripts.min.js?ver=1.0.4"></script>
 
 </body>
 </html>

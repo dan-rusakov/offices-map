@@ -4,23 +4,105 @@
 
 ymaps.ready(function(){
 
-	var json = '[{"country": "Россия","city": "Москва","offices": [{"adress": "Таганская улица, 27","managerName": "Лягушкин Иван Сергеевич","phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}, {"adress": "Усачёва улица, 11И","managerName": "Харитонов Василий Артемиевич","phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]}]}, {"country": "Россия","city": "Новосибирск","offices": [{"adress": "улица Максима Горького, 85","managerName": "Лягушкин Иван Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]}, {"adress": "улица Добролюбова, 201","managerName": "Харитонов Василий Артемиевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]}]}, {"country": "Россия","city": "Пермь","offices": [{"adress": "Комсомольский проспект, 37","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]}, {"country": "Россия","city": "Иркутск","offices": [{"adress": "Верхняя набережная, 10","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]}, {"country": "Россия","city": "Волгоград","offices": [{"adress": "Советская улица, 17","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]}, {"country": "Беларусь","city": "Минск","offices": [{"adress": "Комсомольская улица, 23","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22", "+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]}, {"country": "Беларусь","city": "Могилёв","offices": [{	"adress": "улица Крыленко, 10","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}, {"adress": "улица Бонч-Бруевича, 6","managerName": "Харитонов Василий Артемиевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru", "info@flagstudio.ru"]}]}, {"country": "Беларусь","city": "Витебск","offices": [{"adress": "Московский проспект, 16","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru", "username@flagstudio.ru"]}]}, {"country": "Беларусь","city": "Гомель","offices": [{"adress": "улица Катунина, 6","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]},{"country": "Беларусь", "city": "Борисов", "offices": [{"adress": "Краснознамённая улица, 65","managerName": "Панфилов Анатолий Сергеевич","phones": ["+7(999) 222-22-22"],"emails": ["username@flagstudio.ru"]}]}]';
-	var data = JSON.parse(json);
+	var getJson = function(onSuccess) {
+
+		var xhr = new XMLHttpRequest();
+		xhr.responseType = 'json';
+		xhr.open('GET', '../data.json');
+
+		xhr.addEventListener('load', function(){
+
+			onSuccess(xhr.response); 
+
+		});
+		xhr.send();
+
+	};
 	var cityTemplate = document.querySelector('.city-template').content;
 	var officeTemplate = document.querySelector('.office-template').content;
+	var countryBtnTemplate = document.querySelector('.country-btn-template').content;
 	var currentAdresses = '';
 	var myMap = new ymaps.Map("map", {
 		center: [55.76, 37.64],
-		zoom: 7
-	}); 
+		zoom: 7,
+		controls: []
+	}, {suppressMapOpenBlock: true}); 
 	var MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
 		'<div class="balloon-box">' +
 			'<p class="balloon-box__office">$[properties.balloonOffice]</p>' +
 			'<p class="balloon-box__manager-name">$[properties.balloonManagerName]</p>' +
 			'<div class="balloon-box__phones-list">$[properties.balloonPhone]</div>' +
 			'<div class="balloon-box__emails-list">$[properties.balloonEmail]</div>' +
-		'</div>'
+			'<svg  class="icon balloon-box__close" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><polygon points="16 1.6 14.4 0 8 6.4 1.6 0 0 1.6 6.4 8 0 14.4 1.6 16 8 9.6 14.4 16 16 14.4 9.6 8" fill="#fff"/></svg>' +
+		'</div>', { 
+			build: function () {
+					this.constructor.superclass.build.call(this);
+
+					this.$element = $(this.getParentElement()).find('.balloon-box');
+					//this._applyElementOffset();
+
+					this.$element
+							.find('.balloon-box__close')
+							.on('click', $.proxy(this._onCloseButtonClick, this));
+			},
+			clear: function () {
+					this.$element
+							.find('.balloon-box__close')
+							.off('click');
+
+					this.constructor.superclass.clear.call(this);
+			},
+			_onCloseButtonClick: function (e) {
+					e.preventDefault();
+
+					this.events.fire("userclose");
+			}}
 	);
+
+	getJson(function(data){
+
+	function getCountiesArr(data){
+		var countiesArr = [];
+    data.forEach(function(item, pos) {
+			if(pos > 0){
+				if(countiesArr.indexOf(item.country) == -1){
+					countiesArr.push(item.country);
+				} 
+			} else {
+				countiesArr.push(item.country);
+			}
+    });
+		return countiesArr;
+	};
+
+	
+
+	function displayCountiesBtn(){
+
+		var fragment = document.createDocumentFragment();
+		var countiesArr = getCountiesArr(data);
+
+		countiesArr.forEach(function(item, i){
+			
+			var btnElement = countryBtnTemplate.cloneNode(true);
+
+			if (i == 0){ 
+				btnElement.querySelector('.sidebar__country-input').checked = true; 
+			}
+
+			btnElement.querySelector('.sidebar__country-input').id = item;
+			btnElement.querySelector('.sidebar__btn').htmlFor = item;
+			btnElement.querySelector('.sidebar__btn').dataset.country = item;
+			btnElement.querySelector('.sidebar__btn-text').textContent = item;
+
+			fragment.appendChild(btnElement);
+
+		});
+
+		var btnBox = document.querySelector('.sidebar__btn-box');
+		btnBox.appendChild(fragment);
+
+	};displayCountiesBtn();
 
 	function displayData(data, country){
 
@@ -57,6 +139,7 @@ ymaps.ready(function(){
 		}
 		citiesList.appendChild(fragment);
 		addCitiesListeners();
+		addOfficesListeners();
 
 	};displayData(data, 'Россия');
 
@@ -82,9 +165,10 @@ ymaps.ready(function(){
 
 			item.emails.forEach(function(item, i){
 
-				var emailElement = document.createElement('p');
+				var emailElement = document.createElement('a');
 				emailElement.className = 'city__email';
 				emailElement.textContent = item;
+				emailElement.href = 'mailto:' + item;
 				officeElement.querySelector('.city__emails-list').appendChild(emailElement);
 
 			});
@@ -94,6 +178,36 @@ ymaps.ready(function(){
 		});
 
 		return fragment;
+
+	}
+
+	function addOfficesListeners(){
+
+		var sidebarOffice = document.querySelectorAll('.city__office-name');
+
+		for(var i = 0; i < sidebarOffice.length; i++){
+
+			sidebarOffice[i].addEventListener('click', sidebarOfficeHandler);
+			sidebarOffice[i].addEventListener('keydown', function(evt){
+				if (evt.keyCode === 13){ 
+					sidebarOfficeHandler(evt); 
+				};
+			});
+
+		}
+
+		function sidebarOfficeHandler(evt){
+
+			var cityOfOffice = evt.target.closest('.city').querySelector('.city__name').textContent;
+			var fullAdress = cityOfOffice + ',' + evt.target.textContent.slice(4);
+
+			ymaps.geocode(fullAdress)
+			.then(function (res) {
+					myMap.panTo(res.geoObjects.get(0).geometry.getCoordinates())
+					//myMap.balloon.open(res.geoObjects.get(0).geometry.getCoordinates())
+			});
+		
+		}
 
 	}
 
@@ -131,10 +245,17 @@ ymaps.ready(function(){
 				};
 			});
 
+			
 		}
 
 		function cityHeaderHandler(evt){
-			evt.currentTarget.classList.toggle('active');
+			var currentItem = evt.currentTarget;
+			currentItem.classList.toggle('active');
+			if(currentItem.classList.contains('active')){
+				currentItem.nextElementSibling.style.maxHeight = currentItem.nextElementSibling.scrollHeight + 'px';
+			} else {
+				currentItem.nextElementSibling.style.maxHeight = '0px';
+			}
 		}
 
 	};
@@ -144,10 +265,11 @@ ymaps.ready(function(){
 		myMap.geoObjects.removeAll();
 
 		var clusterIcons = [{
-			href: 'img/clusterIcon.svg',
+			href: '../img/clusterIcon.svg',
 			size: [40, 40],
 			offset: [-20, -20]
 		}];
+
 		var MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #FFFFFF; font-weight: bold;">{{ properties.geoObjects.length }}</div>');
 
 		var clusterer = new ymaps.Clusterer({
@@ -161,12 +283,14 @@ ymaps.ready(function(){
 		for(var i = 0; i < coords.length; i++){
 
 			var geocoder = ymaps.geocode(coords[i]);
+			
 	
 			geocoder.then(function(res){
 
 				var officeData = getOfficeData(res.geoObjects.get(0).properties.get('text'));
 					
 				var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
+				
 				window.placemark = new ymaps.Placemark(coordinates,{
 
 					balloonOffice: 'Офис ' + officeData.adress,
@@ -182,50 +306,40 @@ ymaps.ready(function(){
 					balloonMaxWidth: 800,
 					iconLayout: 'default#imageWithContent',
 					hideIconOnBalloonOpen: false,
-					iconImageHref: 'img/singleIcon.svg',
+					iconImageHref: '../img/singleIcon.svg',
         	iconImageSize: [24, 24],
 					iconImageOffset: [-12, -12]
 
 				});
 
 				clusterer.add(placemark);
+				
 				myMap.setBounds(clusterer.getBounds());
-
-				var objectState = clusterer.getObjectState(geoObjects[2]);
-    if (objectState.isClustered) {
-
-        objectState.cluster.state.set('activeObject', geoObjects[2]);
-				clusterer.balloon.open(objectState.cluster);
-				
-    } else if (objectState.isShown) {
-
-				geoObjects[2].balloon.open();
-				
-    }
 
 			});
 
 		};
-		
-		myMap.geoObjects.add(clusterer);
 
 		
+		myMap.geoObjects.add(clusterer);
 
 	};renderBounds(currentAdresses);
 
 	function getOfficeData(adress){
 
 		var currentData = adress.split(", ");
-		var CurrentCity = currentData[1];
-		var CurrentOffice = currentData[2] + ', ' + currentData[3];
+		var CurrentCity = currentData[currentData.length - 3];
+		var CurrentOffice = currentData[currentData.length - 2] + ', ' + currentData[currentData.length - 1];
 
 		currentData = data.filter(function(item){
-			return item.city == CurrentCity;
+			return item.city.toLowerCase() == CurrentCity.toLowerCase();
 		});
 
 		currentData = currentData[0].offices.filter(function(item){
-			return item.adress == CurrentOffice;
+			return item.adress.toLowerCase() == CurrentOffice.toLowerCase();
 		});
+
+		
 
 		return currentData[0];
 
@@ -235,15 +349,23 @@ ymaps.ready(function(){
 		
 		var contactArr = '';
 
-		arr.forEach(function(item, i){
-			contactArr += '<p class="balloon-box__'+infoType+'">' + item + '</p>';
-		});
+		if (infoType == 'phone'){
+			arr.forEach(function(item, i){
+				contactArr += '<p class="balloon-box__'+infoType+'">' + item + '</p>';
+			});
+		} else if (infoType == 'email') {
+			arr.forEach(function(item, i){
+				contactArr += '<a class="balloon-box__'+infoType+'" href="mailto:' + item + '">' + item + '</a>';
+			});
+		}
+
+		
 
 		return contactArr;
 
 	}
 
-	myMap.geoObjects.events.add('click', setBoundCentered);
+	myMap.geoObjects.events.add('click', setBoundCentered);	
 
 	function setBoundCentered(evt) {
 		var targetObject = evt.get('target');
@@ -257,7 +379,7 @@ ymaps.ready(function(){
 
 
 		if (targetObject.geometry.getType() === 'Point') {
-			myMap.setCenter(targetObject.geometry.getCoordinates(), myMap.getZoom(), {
+			myMap.panTo(targetObject.geometry.getCoordinates(), myMap.getZoom(), {
 				checkZoomRange: true
 			});
 		}
@@ -269,10 +391,13 @@ ymaps.ready(function(){
 		for(var i = 0; i < citiesList.length; i++){
 			if(citiesList[i].textContent == city){
 				citiesList[i].parentNode.classList.add('active');
+				citiesList[i].parentNode.nextElementSibling.style.maxHeight = citiesList[i].parentNode.nextElementSibling.scrollHeight + 'px';
 			}
 		}
 
-	}			
+	}		
+	
+});
 
 });
 
