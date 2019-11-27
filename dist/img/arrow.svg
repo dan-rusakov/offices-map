@@ -1,4 +1,1 @@
-<svg id="Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <title>Монтажная область 2</title>
-  <polygon points="13.88 2.92 8 8.81 2.12 2.92 0 5.04 5.88 10.92 8 13.04 10.12 10.92 16 5.04 13.88 2.92" style="fill: #00325e;fill-rule: evenodd"/>
-</svg>
+<svg data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#00325e" fill-rule="evenodd" d="M13.88 2.92L8 8.81 2.12 2.92 0 5.04l5.88 5.88L8 13.04l2.12-2.12L16 5.04l-2.12-2.12z"/></svg>
